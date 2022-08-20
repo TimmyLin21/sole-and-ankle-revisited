@@ -1,20 +1,35 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
 
-import { WEIGHTS } from '../../constants';
+import { WEIGHTS } from "../../constants";
 
-import Breadcrumbs from '../Breadcrumbs';
-import Select from '../Select';
-import Spacer from '../Spacer';
-import ShoeSidebar from '../ShoeSidebar';
-import ShoeGrid from '../ShoeGrid';
+import Breadcrumbs from "../Breadcrumbs";
+import Select from "../Select";
+import Spacer from "../Spacer";
+import ShoeSidebar from "../ShoeSidebar";
+import ShoeGrid from "../ShoeGrid";
+
+const ShoeBreadCrumbs = () => {
+  return (
+    <Breadcrumbs>
+      <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
+      <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
+      <Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
+    </Breadcrumbs>
+  );
+};
 
 const ShoeIndex = ({ sortId, setSortId }) => {
   return (
     <Wrapper>
       <MainColumn>
         <Header>
-          <Title>Running</Title>
+          <TitleWrapper>
+            <TabletBreadCrumbsWrapper>
+              <ShoeBreadCrumbs />
+            </TabletBreadCrumbsWrapper>
+            <Title>Running</Title>
+          </TitleWrapper>
           <Select
             label="Sort"
             value={sortId}
@@ -28,13 +43,9 @@ const ShoeIndex = ({ sortId, setSortId }) => {
         <ShoeGrid />
       </MainColumn>
       <LeftColumn>
-        <Breadcrumbs>
-          <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
-          <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
-          <Breadcrumbs.Crumb href="/sale/shoes">
-            Shoes
-          </Breadcrumbs.Crumb>
-        </Breadcrumbs>
+        <DesktopBreadCrumbsWrapper>
+          <ShoeBreadCrumbs />
+        </DesktopBreadCrumbsWrapper>
         <Spacer size={42} />
         <ShoeSidebar />
       </LeftColumn>
@@ -51,6 +62,10 @@ const Wrapper = styled.div`
 
 const LeftColumn = styled.div`
   flex-basis: 248px;
+
+  @media ${(p) => p.theme.QUERIES.tabletAndSmaller} {
+    display: none;
+  }
 `;
 
 const MainColumn = styled.div`
@@ -61,11 +76,36 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+
+  @media ${(p) => p.theme.QUERIES.tabletAndSmaller} {
+    align-items: flex-end;
+  }
 `;
 
 const Title = styled.h2`
   font-size: 1.5rem;
   font-weight: ${WEIGHTS.medium};
+`;
+
+const TitleWrapper = styled.div`
+  & > nav {
+    display: none;
+    @media ${(p) => p.theme.QUERIES.tabletAndSmaller} {
+      display: flex;
+    }
+  }
+`;
+
+const DesktopBreadCrumbsWrapper = styled.div`
+  @media ${(p) => p.theme.QUERIES.tabletAndSmaller} {
+    display: none;
+  }
+`;
+const TabletBreadCrumbsWrapper = styled.div`
+  display: none;
+  @media ${(p) => p.theme.QUERIES.tabletAndSmaller} {
+    display: revert;
+  }
 `;
 
 export default ShoeIndex;
