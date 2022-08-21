@@ -43,7 +43,7 @@ const ModalOverlay = styled(DialogOverlay)`
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(96, 100, 108, 0.8);
+  background: var(--color-backdrop);
 `;
 
 const ModalContent = styled(DialogContent)`
