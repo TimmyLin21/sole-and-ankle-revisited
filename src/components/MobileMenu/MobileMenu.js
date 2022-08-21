@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/macro";
 import { DialogOverlay, DialogContent } from "@reach/dialog";
 
-import { COLORS, QUERIES } from "../../constants";
+import { COLORS, QUERIES, WEIGHTS } from "../../constants";
 
 import UnstyledButton from "../UnstyledButton";
 import Icon from "../Icon";
@@ -20,6 +20,7 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
           <VisuallyHidden>Dismiss menu</VisuallyHidden>
           <Icon id="close" size="24" strokeWidth="2" aria-hidden />
         </CloseButton>
+        <Fill />
         <Nav>
           <NavLink href="/sale">SALE</NavLink>
           <NavLink href="/new">NEW&nbsp;RELEASES</NavLink>
@@ -39,7 +40,7 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
 };
 
 const ModalOverlay = styled(DialogOverlay)`
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
@@ -49,19 +50,22 @@ const ModalOverlay = styled(DialogOverlay)`
 
 const ModalContent = styled(DialogContent)`
   width: 300px;
-  height: 100vh;
+  height: 100%;
   right: 0;
   background: #ffffff;
   position: absolute;
   padding: 32px;
-  padding-right: 22px;
+  padding-right: 0px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 
 const CloseButton = styled(UnstyledButton)`
-  align-self: flex-end;
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  padding: 16px;
 `;
 
 const Nav = styled.nav`
@@ -73,6 +77,7 @@ const Nav = styled.nav`
 const NavLink = styled.a`
   text-decoration: none;
   color: ${COLORS.gray[900]};
+  font-weight: ${WEIGHTS.medium};
   &:first-of-type {
     color: ${COLORS.secondary};
   }
@@ -83,11 +88,18 @@ const Link = styled.a`
   text-decoration: none;
   color: ${COLORS.gray[700]};
   font-size: ${14 / 16}rem;
+  font-weight: ${WEIGHTS.medium};
 `;
 
 const Footer = styled.footer`
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 14px;
+`;
+
+const Fill = styled.div`
+  flex: 1;
 `;
 export default MobileMenu;
