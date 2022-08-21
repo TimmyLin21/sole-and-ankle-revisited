@@ -57,7 +57,6 @@ const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px 32px;
-  height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
   overflow-x: auto;
   overflow-y: hidden;
@@ -74,9 +73,8 @@ const MainHeader = styled.div`
 
 const Nav = styled.nav`
   display: flex;
-  gap: clamp(1.5rem, 9vw - 4rem, 3rem);
+  gap: clamp(1rem, 9vw - 4.25rem, 3.5rem);
   margin: 0px 48px;
-  margin-right: 0px;
   @media ${(p) => p.theme.QUERIES.tabletAndSmaller} {
     display: none;
   }
